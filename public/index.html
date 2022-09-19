@@ -9,34 +9,68 @@
     <link rel="stylesheet" href="../src/app.css">
 </head>
 <body>
-    <div class="container">
-        <div class="flex justify-between py-2 items-end h-16">
-            <div class="w-52 shrink-0">
-                <img src="https://okursah.ru/img/logos/logo-svg.svg" alt="okursah">
-            </div>
-            <nav>
-                <ul class="font-medium gap-x-6 hidden lg:flex">
-                    <li>
-                        <a href="#" class="pt-1.5 pb-2 px-5 ring-1 ring-yellow-300 rounded-full hover:opacity-50">
-                            Категории
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">Бесплатные курсы</a>
-                    </li>
-                    <li>
-                        <a href="#">Отзывы о школах</a>
-                    </li>
-                    <li>
-                        <a href="#">Промокоды</a>
-                    </li>
-                    <li>
-                        <a href="#">Подобрать курс</a>
-                    </li>
-                </ul>
-            </nav>
+<div class="container">
+    <header class="flex justify-between py-2 items-end h-16 mb-4">
+        <a href="#" class="w-52 shrink-0">
+            <img src="/img/logo-svg.svg" alt="okursah">
+        </a>
+        <nav>
+            <ul class="font-medium gap-x-6 hidden lg:flex items-center">
+                <li class="flex justify-between items-center hover:opacity-75">
+                    <a href="#"
+                       class="pt-1 pb-2 px-3 ring-1 ring-yellow-300 rounded-full flex justify-between items-center">
+                        Категории
+                        <svg class="w-4 h-4 ml-2 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none"
+                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+                        </svg>
+                    </a>
+                </li>
+                <li class="hover:opacity-75">
+                    <a href="#">Бесплатные курсы</a>
+                </li>
+                <li class="hover:opacity-75">
+                    <a href="#">Отзывы о школах</a>
+                </li>
+                <li class="hover:opacity-75">
+                    <a href="#">Промокоды</a>
+                </li>
+                <li class="hover:opacity-75">
+                    <a href="#">Подобрать курс</a>
+                </li>
+                <li class="hover:opacity-75">
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="flex justify-center items-center p-12 rounded-md shadow-xl shadow-gray-200">
+        <div class="">
+            <h1 class="font-bold text-xl sm:text-4xl">Найди лучший онлайн курс для себя!</h1>
+            <p class="py-6 text-xl">
+                Окурсах.ру - каталог образовательных онлайн- платформ и курсов. Сравните все обучающие онлайн-курсы,
+                выберите лучший для себя по цене, продолжительности и отзывам!
+            </p>
+            <p class="text-xl">
+                Всего <a href="#" class="text-blue-700 hover:text-blue-800">5555 курсов</a> в <a href="#" class="text-blue-700 hover:text-blue-800">128 школах</a>
+            </p>
+            <a href="#" class="block bg-yellow-300 mt-6 py-3 w-60 text-center rounded hover:shadow-lg hover:shadow-gray-200 hover:bg-yellow-400 transition ease-in-out">
+                Подобрать курс
+            </a>
+        </div>
+        <div class="flex-shrink-0 hidden lg:block">
+            <img src="/img/banner_o.webp" alt="Баннер">
         </div>
     </div>
+
+</div>
 
 
 </body>
