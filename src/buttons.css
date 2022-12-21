@@ -1,0 +1,13 @@
+/* buttons */
+.button {
+    @apply py-2 px-6 inline-block rounded text-black
+}
+
+.button-default {
+    @apply bg-yellow-300 hover:shadow-gray-200 hover:bg-yellow-400 transition ease-in-out
+}
+
+.button-secondary {
+    @apply bg-slate-200 hover:shadow-gray-200 hover:bg-yellow-300
+}
+/* buttons */
