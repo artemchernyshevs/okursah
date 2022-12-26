@@ -1,6 +1,6 @@
 /* buttons */
 .button {
-    @apply py-2 px-6 inline-block rounded text-black
+    @apply py-2 px-6 rounded text-black
 }
 
 .button-default {

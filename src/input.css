@@ -1,8 +1,11 @@
 @import url("../font/style.css");
+@import "balloon-css/balloon.min.css";
 
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@import "./default.css";
 
 @import "./buttons.css";
 
