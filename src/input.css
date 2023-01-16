@@ -17,4 +17,8 @@ a {
 nav a {
     @apply text-black
 }
+
+[x-cloak] {
+    display: none !important;
+}
 /* override */
