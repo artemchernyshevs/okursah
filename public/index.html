@@ -12,18 +12,22 @@
 <body>
 <div class="container">
     <!-- Header -->
-    <header class="flex justify-between py-2 items-end h-16 mb-4">
+    <header class="fixed inset-0 px-4 bg-white w-full flex justify-between py-2 items-end h-16 mb-4 sm:static sm:px-0" x-data @keyup.esc="$store.menu.hideAll()">
         <a href="#" class="w-52 shrink-0">
             <img src="../img/logo-svg.svg" alt="okursah">
         </a>
+
+        <!-- desktop  -->
         <nav>
             <ul class="font-medium hidden lg:flex items-center space-x-3">
                 <li class="flex justify-between items-center hover:opacity-75">
                     <a href="#"
-                       class="py-1.5 px-3 ring-1 ring-yellow-300 rounded-full flex justify-between items-center">
+                       class="py-1.5 px-3 ring-1 ring-yellow-300 rounded-full flex justify-between items-center"
+                        @click="$store.menu.show('category')"
+                    >
                         Категории
                         <svg class="w-6 h-6 pl-1" xmlns="http://www.w3.org/2000/svg" fill="none"
-                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
                         </svg>
                     </a>
@@ -51,7 +55,1493 @@
                 </li>
             </ul>
         </nav>
+
+        <!-- mobile -->
+        <div class="self-center sm:hidden">
+            <a href="#!" @click="$store.menu.toggle('category', 'mobile')">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8" x-show="!$store.menu.status('category', 'mobile')">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8" x-show="$store.menu.status('category', 'mobile')" x-cloak>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </a>
+        </div>
+
+
+        <div class="fixed
+                    z-10
+                    w-full
+                    max-h-0
+                    top-0
+                    left-0
+                    bg-slate-50
+                    text-lg
+                    transition
+                    transition-all
+                    duration-1000
+                    ease-in-out
+                    shadow shadow-lg
+                    overflow-y-scroll
+                    overflow-hidden"
+             :class="$store.menu.status('category') && 'max-h-[90vh]'"
+        >
+            <div class="relative">
+                <button class="absolute right-24 top-5" @click="$store.menu.hideAll()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-9 h-9">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="py-12 px-36 flex"
+                 x-data="{ active: 'business' }"
+                 @menu-item-change.window="active = $event.detail">
+                <ul class="text-2xl font-bold space-y-5 w-1/3">
+                    <li>
+                        <a href="#" class="text-black hover:text-yellow-400"
+                           :class="active == 'business' && 'text-yellow-300'"
+                           @click="active = 'business'">
+                            Бизнес и финансы
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-black hover:text-yellow-400"
+                           :class="active == 'marketing' && 'text-yellow-300'"
+                           @click="active = 'marketing'"
+                        >
+                            Маркетинг
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-black hover:text-yellow-400"
+                           :class="active == 'prorammirovanie' && 'text-yellow-300'"
+                           @click="active = 'prorammirovanie'"
+                        >
+                            Программирование
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-black hover:text-yellow-400"
+                           :class="active == 'design' && 'text-yellow-300'"
+                           @click="active = 'design'"
+                        >
+                            Дизайн
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-black hover:text-yellow-400"
+                           :class="active == 'analitics' && 'text-yellow-300'"
+                           @click="active = 'analitics'"
+                        >
+                            Аналитика
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-black hover:text-yellow-400"
+                           :class="active == 'video' && 'text-yellow-300'"
+                           @click="active = 'video'"
+                        >
+                            Видео, фото, аудио
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-black hover:text-yellow-400"
+                           :class="active == 'english' && 'text-yellow-300'"
+                           @click="active = 'english'"
+                        >
+                            Иностранный язык
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-black hover:text-yellow-400"
+                           :class="active == 'children' && 'text-yellow-300'"
+                           @click="active = 'children'"
+                        >
+                            Для детей
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-black hover:text-yellow-400"
+                           :class="active == 'beauty' && 'text-yellow-300'"
+                           @click="active = 'beauty'"
+                        >
+                            Красота и косметология
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-black hover:text-yellow-400"
+                           :class="active == 'self' && 'text-yellow-300'"
+                           @click="active = 'self'"
+                        >
+                            Саморазвитие
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="w-2/3">
+                    <template x-if="active == 'business'">
+                        <ul class="grid grid-cols-2 auto-rows-min gap-y-2 gap-x-6 font-semibold">
+                            <li>
+                                <a href="#" class="text-slate-500">Event-менеджмент</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Excel и Google таблицы</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">HR и управление персоналом</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Product manager</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Project manager</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Арт-менеджмент</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Бизнес-юрист</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Бухгалтерия</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Деловые переговоры</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Курсы по e-commerce</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Курсы по инвестициям</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Курсы по криптовалютам</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Менеджер маркетплейсов</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Открытие бизнеса</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Работа с презентациями</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Управление бизнесом</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Управление в SMM</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Управление маркетингом</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Управление образовательными проектами</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Управление по Agile и Scrum</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Управление продажами</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Финансовая аналитика</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Финансы для руководителей</a>
+                            </li>
+                        </ul>
+                    </template>
+
+                    <template x-if="active == 'marketing'">
+                        <ul class="grid grid-cols-2 auto-rows-min gap-y-2 gap-x-6 font-semibold">
+                            <li>
+                                <a href="#" class="text-slate-500">CRM и email-маркетинг</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">PR-менеджмент</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">SEO-продвижение</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">SMM-продвижение</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Блогерство</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Бренд-менеджмент</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Интернет-маркетинг</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Контекстная реклама</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Контент-маркетинг</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Копирайтинг</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Маркетинг мобильных приложений</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Мессенджер-маркетинг и чат-боты</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Продвижение в TikTok</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Развитие креативного мышления</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Редактор текста</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Реклама у блогеров</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Сторителлинг</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Таргетированная реклама</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Бесплатные</a>
+                            </li>
+                        </ul>
+                    </template>
+
+                    <template x-if="active == 'prorammirovanie'">
+                        <ul class="grid grid-cols-2 auto-rows-min gap-y-2 gap-x-6 font-semibold">
+                            <li>
+                                <a href="#" class="text-slate-500">1C программирование</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">DevOps</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Frontend-разработка</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Golang-разработка</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Java-программирование</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">JavaScript-программирование</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">PHP-программирование</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">SQL</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">VR/AR разработка</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Веб-разработка</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Информационная безопасность</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Курсы тестировщиков</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Программирование на C++</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Программирование на Python</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Работа с GIT</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Разработка игр</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Разработка мобильных приложений</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Разработка на C#</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Разработка на Kotlin</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Разработка на Swift</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Системное администрирование</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Создание сайтов</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Управление разработкой и IT</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Фреймворк Django</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Фреймворк Flutter</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Бесплатные</a>
+                            </li>
+                        </ul>
+                    </template>
+
+                    <template x-if="active == 'design'">
+                        <ul class="grid grid-cols-2 auto-rows-min gap-y-2 gap-x-6 font-semibold">
+                            <li>
+                                <a href="#" class="text-slate-500">2D-анимация</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">3D-MAX</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">3D-анимация</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">3D-моделирование</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Adobe After Effects</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Adobe Illustrator</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Adobe Photoshop</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">ArchiCAD</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">AutoCAD</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Figma</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Motion-дизайн</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">UX/UI-дизайн</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Веб-дизайн</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Геймдизайн</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Графика на Houdini</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Графический дизайн</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Дизайн интерьеров</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Дизайн мобильных приложений</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Курсы по шрифтам</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Ландшафтный дизайн</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Рисование</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Скетчинг</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Создание лендингов</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Бесплатные</a>
+                            </li>
+                        </ul>
+                    </template>
+
+                    <template x-if="active == 'analitics'">
+                        <ul class="grid grid-cols-2 auto-rows-min gap-y-2 gap-x-6 font-semibold">
+                            <li>
+                                <a href="#" class="text-slate-500">Data Engineering</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Deep Learning</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">SQL для анализа данных</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Аналитика на Power BI</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Аналитика на Python</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Аналитика на R</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Аналитика на Tableau</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Бизнес-аналитика</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Веб-аналитика</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Искусственный интеллект</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Курсы по Big Data</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Курсы по Data Science</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Маркетинговая аналитика</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Математика для Data Science</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Машинное обучение</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Нейронные сети</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Продуктовая аналитика</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Системная аналитика</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Бесплатные</a>
+                            </li>
+                        </ul>
+                    </template>
+
+                    <template x-if="active == 'video'">
+                        <ul class="grid grid-cols-2 auto-rows-min gap-y-2 gap-x-6 font-semibold">
+                            <li>
+                                <a href="#" class="text-slate-500">Ableton Live</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Cinema 4D</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Sound-дизайн и звукорежиссура</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Продвижение видео</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Создание и монтаж видео</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Создание электронной музыки</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Съемка и обработка фото</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Бесплатные</a>
+                            </li>
+                        </ul>
+                    </template>
+
+                    <template x-if="active == 'english'">
+                        <ul class="grid grid-cols-2 auto-rows-min gap-y-2 gap-x-6 font-semibold">
+                            <li>
+                                <a href="#" class="text-slate-500">Английский</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Арабский</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Испанский</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Итальянский</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Китайский</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Немецкий</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Польский</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Португальский</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Турецкий</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Французский</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Чешский</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Японский</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Бесплатные</a>
+                            </li>
+                        </ul>
+                    </template>
+
+                    <template x-if="active == 'children'">
+                        <ul class="grid grid-cols-2 auto-rows-min gap-y-2 gap-x-6 font-semibold">
+                            <li>
+                                <a href="#" class="text-slate-500">1 класс</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">2 класс</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">3 класс</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">4 класс</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">5 класс</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">6 класс</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">7 класс</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">8 класс</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">9 класс</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">10 класс</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">11 класс</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Подготовка к ОГЭ</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Подготовка к ЕГЭ</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Чтение и правописание</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Помощь студентам в написании работ</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Развитие памяти и внимания у детей</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Программирование для детей</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Курсы по программированию в Minecraft</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Английский язык</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Шахматы для детей</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Мотивация на учебу</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Финансовая грамотность для детей</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Рисование для детей</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Дошкольное образование</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Бесплатные</a>
+                            </li>
+                        </ul>
+                    </template>
+
+                    <template x-if="active == 'beauty'">
+                        <ul class="grid grid-cols-2 auto-rows-min gap-y-2 gap-x-6 font-semibold">
+                            <li>
+                                <a href="#" class="text-slate-500">Курсы барберов</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Курсы бровиста</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Курсы массажа</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Курсы по аппаратной косметологии</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Курсы стилиста</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Онлайн-курсы визажиста, фейсфитнеса</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Онлайн-курсы депиляции</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Онлайн-курсы ламинирования ресниц</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Онлайн-курсы маникюра</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Онлайн-курсы наращивания ресниц</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Онлайн-курсы парикмахера</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Онлайн-курсы педикюра</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Уход за собой</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Фитнес, здоровое питание</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Бесплатные</a>
+                            </li>
+                        </ul>
+                    </template>
+
+                    <template x-if="active == 'self'">
+                        <ul class="grid grid-cols-2 auto-rows-min gap-y-2 gap-x-6 font-semibold">
+                            <li>
+                                <a href="#" class="text-slate-500">Каллиграфия</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Курсы шитья</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Личностный рост</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Медитация</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Ораторское мастерство</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Основы коммуникации</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Психология</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Развитие памяти и внимания</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Самообразование</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Тайм-менеджмент</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Финансовая грамотность</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Эмоциональный интеллект</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-slate-500">Бесплатные</a>
+                            </li>
+                        </ul>
+                    </template>
+                </div>
+            </div>
+        </div>
     </header>
+
+    <nav class="inset-0 top-16 overflow-y-scroll bg-slate-50 fixed sm:hidden" x-data x-transition x-show="$store.menu.status('category', 'mobile')">
+        <ul class="p-4 flex flex-wrap gap-2">
+            <li>
+                <a href="#" class="py-1.5 px-3 border border-2 border-black font-bold block bg-white rounded-full">Бизнес и финансы</a>
+            </li>
+            <li>
+                <a href="#" class="py-1.5 px-3 border border-2 border-black font-bold block bg-white rounded-full">Маркетинг</a>
+            </li>
+            <li>
+                <a href="#" class="py-1.5 px-3 border border-2 border-black font-bold block bg-white rounded-full">Программирование</a>
+            </li>
+            <li>
+                <a href="#" class="py-1.5 px-3 border border-2 border-black font-bold block bg-white rounded-full">Дизайн</a>
+            </li>
+            <li>
+                <a href="#" class="py-1.5 px-3 border border-2 border-black font-bold block bg-white rounded-full">Аналитика</a>
+            </li>
+            <li>
+                <a href="#" class="py-1.5 px-3 border border-2 border-black font-bold block bg-white rounded-full">Видео, фото, аудио</a>
+            </li>
+            <li>
+                <a href="#" class="py-1.5 px-3 border border-2 border-black font-bold block bg-white rounded-full">Иностранный язык</a>
+            </li>
+            <li>
+                <a href="#" class="py-1.5 px-3 border border-2 border-black font-bold block bg-white rounded-full">Для детей</a>
+            </li>
+            <li>
+                <a href="#" class="py-1.5 px-3 border border-2 border-black font-bold block bg-white rounded-full">Красота и косметология</a>
+            </li>
+            <li>
+                <a href="#" class="py-1.5 px-3 border border-2 border-black font-bold block bg-white rounded-full">Саморазвитие</a>
+            </li>
+        </ul>
+
+        <ul class="divide-y">
+            <li class="px-4 py-2" x-data="{expand: false}">
+                <a href="#" class="flex justify-between items-center text-xl" :class="expand && 'font-bold'" @click="expand = !expand">
+                    Бизнес и финансы
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 transition" :class="expand && 'rotate-180'">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </a>
+                <ul class="divide-y" x-show="expand" x-cloak>
+                    <li>
+                        <a href="#" class="py-2 block">Event-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Excel и Google таблицы</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">HR и управление персоналом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Product manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Project manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Арт-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бизнес-юрист</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бухгалтерия</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Деловые переговоры</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по e-commerce</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по инвестициям</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по криптовалютам</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Менеджер маркетплейсов</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Открытие бизнеса</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Работа с презентациями</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление бизнесом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление в SMM</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление маркетингом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление образовательными проектами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление по Agile и Scrum</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление продажами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансовая аналитика</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансы для руководителей</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="px-4 py-2" x-data="{expand: false}">
+                <a href="#" class="flex justify-between items-center text-xl" :class="expand && 'font-bold'" @click="expand = !expand">
+                    Маркетинг
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 transition" :class="expand && 'rotate-180'">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </a>
+                <ul class="divide-y" x-show="expand" x-cloak>
+                    <li>
+                        <a href="#" class="py-2 block">Event-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Excel и Google таблицы</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">HR и управление персоналом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Product manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Project manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Арт-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бизнес-юрист</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бухгалтерия</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Деловые переговоры</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по e-commerce</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по инвестициям</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по криптовалютам</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Менеджер маркетплейсов</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Открытие бизнеса</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Работа с презентациями</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление бизнесом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление в SMM</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление маркетингом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление образовательными проектами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление по Agile и Scrum</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление продажами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансовая аналитика</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансы для руководителей</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="px-4 py-2" x-data="{expand: false}">
+                <a href="#" class="flex justify-between items-center text-xl" :class="expand && 'font-bold'" @click="expand = !expand">
+                    Программирование
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 transition" :class="expand && 'rotate-180'">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </a>
+                <ul class="divide-y" x-show="expand" x-cloak>
+                    <li>
+                        <a href="#" class="py-2 block">Event-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Excel и Google таблицы</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">HR и управление персоналом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Product manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Project manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Арт-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бизнес-юрист</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бухгалтерия</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Деловые переговоры</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по e-commerce</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по инвестициям</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по криптовалютам</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Менеджер маркетплейсов</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Открытие бизнеса</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Работа с презентациями</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление бизнесом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление в SMM</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление маркетингом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление образовательными проектами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление по Agile и Scrum</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление продажами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансовая аналитика</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансы для руководителей</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="px-4 py-2" x-data="{expand: false}">
+                <a href="#" class="flex justify-between items-center text-xl" :class="expand && 'font-bold'" @click="expand = !expand">
+                    Дизайн
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 transition" :class="expand && 'rotate-180'">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </a>
+                <ul class="divide-y" x-show="expand" x-cloak>
+                    <li>
+                        <a href="#" class="py-2 block">Event-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Excel и Google таблицы</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">HR и управление персоналом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Product manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Project manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Арт-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бизнес-юрист</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бухгалтерия</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Деловые переговоры</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по e-commerce</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по инвестициям</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по криптовалютам</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Менеджер маркетплейсов</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Открытие бизнеса</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Работа с презентациями</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление бизнесом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление в SMM</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление маркетингом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление образовательными проектами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление по Agile и Scrum</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление продажами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансовая аналитика</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансы для руководителей</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="px-4 py-2" x-data="{expand: false}">
+                <a href="#" class="flex justify-between items-center text-xl" :class="expand && 'font-bold'" @click="expand = !expand">
+                    Аналитика
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 transition" :class="expand && 'rotate-180'">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </a>
+                <ul class="divide-y" x-show="expand" x-cloak>
+                    <li>
+                        <a href="#" class="py-2 block">Event-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Excel и Google таблицы</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">HR и управление персоналом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Product manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Project manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Арт-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бизнес-юрист</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бухгалтерия</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Деловые переговоры</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по e-commerce</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по инвестициям</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по криптовалютам</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Менеджер маркетплейсов</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Открытие бизнеса</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Работа с презентациями</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление бизнесом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление в SMM</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление маркетингом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление образовательными проектами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление по Agile и Scrum</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление продажами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансовая аналитика</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансы для руководителей</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="px-4 py-2">
+                <a href="#" class="flex justify-between items-center text-xl">
+                    Видео, фото, аудио
+                </a>
+            </li>
+            <li class="px-4 py-2" x-data="{expand: false}">
+                <a href="#" class="flex justify-between items-center text-xl" :class="expand && 'font-bold'" @click="expand = !expand">
+                    Иностранный язык
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 transition" :class="expand && 'rotate-180'">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </a>
+                <ul class="divide-y" x-show="expand" x-cloak>
+                    <li>
+                        <a href="#" class="py-2 block">Event-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Excel и Google таблицы</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">HR и управление персоналом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Product manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Project manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Арт-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бизнес-юрист</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бухгалтерия</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Деловые переговоры</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по e-commerce</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по инвестициям</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по криптовалютам</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Менеджер маркетплейсов</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Открытие бизнеса</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Работа с презентациями</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление бизнесом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление в SMM</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление маркетингом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление образовательными проектами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление по Agile и Scrum</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление продажами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансовая аналитика</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансы для руководителей</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="px-4 py-2" x-data="{expand: false}">
+                <a href="#" class="flex justify-between items-center text-xl" :class="expand && 'font-bold'" @click="expand = !expand">
+                    Для детей
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 transition" :class="expand && 'rotate-180'">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </a>
+                <ul class="divide-y" x-show="expand" x-cloak>
+                    <li>
+                        <a href="#" class="py-2 block">Event-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Excel и Google таблицы</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">HR и управление персоналом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Product manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Project manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Арт-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бизнес-юрист</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бухгалтерия</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Деловые переговоры</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по e-commerce</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по инвестициям</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по криптовалютам</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Менеджер маркетплейсов</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Открытие бизнеса</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Работа с презентациями</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление бизнесом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление в SMM</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление маркетингом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление образовательными проектами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление по Agile и Scrum</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление продажами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансовая аналитика</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансы для руководителей</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="px-4 py-2" x-data="{expand: false}">
+                <a href="#" class="flex justify-between items-center text-xl" :class="expand && 'font-bold'" @click="expand = !expand">
+                    Красота и косметология
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 transition" :class="expand && 'rotate-180'">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </a>
+                <ul class="divide-y" x-show="expand" x-cloak>
+                    <li>
+                        <a href="#" class="py-2 block">Event-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Excel и Google таблицы</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">HR и управление персоналом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Product manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Project manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Арт-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бизнес-юрист</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бухгалтерия</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Деловые переговоры</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по e-commerce</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по инвестициям</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по криптовалютам</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Менеджер маркетплейсов</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Открытие бизнеса</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Работа с презентациями</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление бизнесом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление в SMM</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление маркетингом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление образовательными проектами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление по Agile и Scrum</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление продажами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансовая аналитика</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансы для руководителей</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="px-4 py-2" x-data="{expand: false}">
+                <a href="#" class="flex justify-between items-center text-xl" :class="expand && 'font-bold'" @click="expand = !expand">
+                    Саморазвитие
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 transition" :class="expand && 'rotate-180'">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </a>
+                <ul class="divide-y" x-show="expand" x-cloak>
+                    <li>
+                        <a href="#" class="py-2 block">Event-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Excel и Google таблицы</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">HR и управление персоналом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Product manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Project manager</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Арт-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бизнес-юрист</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Бухгалтерия</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Деловые переговоры</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по e-commerce</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по инвестициям</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Курсы по криптовалютам</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Менеджер маркетплейсов</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Открытие бизнеса</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Работа с презентациями</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление бизнесом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление в SMM</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление маркетингом</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление образовательными проектами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление по Agile и Scrum</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Управление продажами</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансовая аналитика</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 block">Финансы для руководителей</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
 
     <!-- Hero -->
     <div class="flex justify-center items-center p-12 rounded-md shadow-xl shadow-gray-200 mb-6">
@@ -74,7 +1564,7 @@
     </div>
 
     <!-- Directions -->
-    <section>
+    <section x-data>
         <h2 class="my-3">Направления курсов</h2>
 
         <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-7">
@@ -99,17 +1589,25 @@
                 </ul>
 
                 <div class="text-center text-lg font-medium">
-                    <a href="#" class="ring-2 rounded-full ring-yellow-300 p-1.5 hover:bg-yellow-300 flex items-center justify-center">
+                    <a href="#!" class="hidden ring-2 rounded-full ring-yellow-300 p-1.5 items-center justify-center hover:bg-yellow-300 sm:flex"
+                       @click="
+                           $dispatch('menu-item-change', 'business');
+                           $nextTick(() => $store.menu.toggle('category'))
+                       "
+                    >
                         Все курсы
                         <svg class="w-6 h-6 pl-1 pt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
                         </svg>
                     </a>
+                    <a href="#" class="text-left block sm:hidden">
+                        Все курсы
+                    </a>
                 </div>
             </div>
 
             <div class="bg-slate-50 p-6 space-y-6">
-                <div class="font-semibold text-lg">Бизнес и финансы</div>
+                <div class="font-semibold text-lg">Маркетинг</div>
                 <ul class="space-y-2">
                     <li>
                         <a href="#">Event-менеджмент</a>
@@ -129,17 +1627,25 @@
                 </ul>
 
                 <div class="text-center text-lg font-medium">
-                    <a href="#" class="ring-2 rounded-full ring-yellow-300 p-1.5 hover:bg-yellow-300 flex items-center justify-center">
+                    <a href="#!" class="hidden ring-2 rounded-full ring-yellow-300 p-1.5 items-center justify-center hover:bg-yellow-300 sm:flex"
+                       @click="
+                           $dispatch('menu-item-change', 'marketing');
+                           $nextTick(() => $store.menu.toggle('category'))
+                       "
+                    >
                         Все курсы
                         <svg class="w-6 h-6 pl-1 pt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
                         </svg>
                     </a>
+                    <a href="#" class="text-left block sm:hidden">
+                        Все курсы
+                    </a>
                 </div>
             </div>
 
             <div class="bg-slate-50 p-6 space-y-6">
-                <div class="font-semibold text-lg">Бизнес и финансы</div>
+                <div class="font-semibold text-lg">Программирование</div>
                 <ul class="space-y-2">
                     <li>
                         <a href="#">Event-менеджмент</a>
@@ -159,17 +1665,25 @@
                 </ul>
 
                 <div class="text-center text-lg font-medium">
-                    <a href="#" class="ring-2 rounded-full ring-yellow-300 p-1.5 hover:bg-yellow-300 flex items-center justify-center">
+                    <a href="#!" class="hidden ring-2 rounded-full ring-yellow-300 p-1.5 hover:bg-yellow-300 items-center justify-center sm:flex"
+                       @click="
+                           $dispatch('menu-item-change', 'prorammirovanie');
+                           $nextTick(() => $store.menu.toggle('category'))
+                       "
+                    >
                         Все курсы
                         <svg class="w-6 h-6 pl-1 pt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
                         </svg>
                     </a>
+                    <a href="#" class="text-left block sm:hidden">
+                        Все курсы
+                    </a>
                 </div>
             </div>
 
             <div class="bg-slate-50 p-6 space-y-6">
-                <div class="font-semibold text-lg">Бизнес и финансы</div>
+                <div class="font-semibold text-lg">Дизайн</div>
                 <ul class="space-y-2">
                     <li>
                         <a href="#">Event-менеджмент</a>
@@ -189,17 +1703,25 @@
                 </ul>
 
                 <div class="text-center text-lg font-medium">
-                    <a href="#" class="ring-2 rounded-full ring-yellow-300 p-1.5 hover:bg-yellow-300 flex items-center justify-center">
+                    <a href="#!" class="hidden ring-2 rounded-full ring-yellow-300 p-1.5 items-center justify-center hover:bg-yellow-300 sm:flex"
+                       @click="
+                           $dispatch('menu-item-change', 'design');
+                           $nextTick(() => $store.menu.toggle('category'))
+                       "
+                    >
                         Все курсы
                         <svg class="w-6 h-6 pl-1 pt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
                         </svg>
                     </a>
+                    <a href="#" class="text-left block sm:hidden">
+                        Все курсы
+                    </a>
                 </div>
             </div>
 
             <div class="bg-slate-50 p-6 space-y-6">
-                <div class="font-semibold text-lg">Бизнес и финансы</div>
+                <div class="font-semibold text-lg">Аналитика</div>
                 <ul class="space-y-2">
                     <li>
                         <a href="#">Event-менеджмент</a>
@@ -219,17 +1741,25 @@
                 </ul>
 
                 <div class="text-center text-lg font-medium">
-                    <a href="#" class="ring-2 rounded-full ring-yellow-300 p-1.5 hover:bg-yellow-300 flex items-center justify-center">
+                    <a href="#!" class="hidden ring-2 rounded-full ring-yellow-300 p-1.5 items-center justify-center hover:bg-yellow-300 sm:flex"
+                       @click="
+                           $dispatch('menu-item-change', 'analitics');
+                           $nextTick(() => $store.menu.toggle('category'))
+                       "
+                    >
                         Все курсы
                         <svg class="w-6 h-6 pl-1 pt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
                         </svg>
                     </a>
+                    <a href="#" class="text-left block sm:hidden">
+                        Все курсы
+                    </a>
                 </div>
             </div>
 
             <div class="bg-slate-50 p-6 space-y-6">
-                <div class="font-semibold text-lg">Бизнес и финансы</div>
+                <div class="font-semibold text-lg">Видео, фото, аудио</div>
                 <ul class="space-y-2">
                     <li>
                         <a href="#">Event-менеджмент</a>
@@ -249,17 +1779,25 @@
                 </ul>
 
                 <div class="text-center text-lg font-medium">
-                    <a href="#" class="ring-2 rounded-full ring-yellow-300 p-1.5 hover:bg-yellow-300 flex items-center justify-center">
+                    <a href="#!" class="hidden ring-2 rounded-full ring-yellow-300 p-1.5 items-center justify-center hover:bg-yellow-300 sm:flex"
+                       @click="
+                           $dispatch('menu-item-change', 'video');
+                           $nextTick(() => $store.menu.toggle('category'))
+                       "
+                    >
                         Все курсы
                         <svg class="w-6 h-6 pl-1 pt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
                         </svg>
                     </a>
+                    <a href="#" class="text-left block sm:hidden">
+                        Все курсы
+                    </a>
                 </div>
             </div>
 
             <div class="bg-slate-50 p-6 space-y-6">
-                <div class="font-semibold text-lg">Бизнес и финансы</div>
+                <div class="font-semibold text-lg">Иностранный язык</div>
                 <ul class="space-y-2">
                     <li>
                         <a href="#">Event-менеджмент</a>
@@ -279,11 +1817,133 @@
                 </ul>
 
                 <div class="text-center text-lg font-medium">
-                    <a href="#" class="ring-2 rounded-full ring-yellow-300 p-1.5 hover:bg-yellow-300 flex items-center justify-center">
+                    <a href="#!" class="hidden ring-2 rounded-full ring-yellow-300 p-1.5 items-center justify-center hover:bg-yellow-300 sm:flex"
+                       @click="
+                           $dispatch('menu-item-change', 'english');
+                           $nextTick(() => $store.menu.toggle('category'))
+                       "
+                    >
                         Все курсы
                         <svg class="w-6 h-6 pl-1 pt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
                         </svg>
+                    </a>
+                    <a href="#" class="text-left block sm:hidden">
+                        Все курсы
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 p-6 space-y-6">
+                <div class="font-semibold text-lg">Для детей</div>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#">Event-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#">Excel и Google таблицы</a>
+                    </li>
+                    <li>
+                        <a href="#">HR и управление персоналом</a>
+                    </li>
+                    <li>
+                        <a href="#">Product manager</a>
+                    </li>
+                    <li>
+                        <a href="#">Project manager</a>
+                    </li>
+                </ul>
+
+                <div class="text-center text-lg font-medium">
+                    <a href="#!" class="hidden ring-2 rounded-full ring-yellow-300 p-1.5 items-center justify-center hover:bg-yellow-300 sm:flex"
+                       @click="
+                           $dispatch('menu-item-change', 'children');
+                           $nextTick(() => $store.menu.toggle('category'))
+                       "
+                    >
+                        Все курсы
+                        <svg class="w-6 h-6 pl-1 pt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-left block sm:hidden">
+                        Все курсы
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 p-6 space-y-6">
+                <div class="font-semibold text-lg">Красота и косметология</div>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#">Event-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#">Excel и Google таблицы</a>
+                    </li>
+                    <li>
+                        <a href="#">HR и управление персоналом</a>
+                    </li>
+                    <li>
+                        <a href="#">Product manager</a>
+                    </li>
+                    <li>
+                        <a href="#">Project manager</a>
+                    </li>
+                </ul>
+
+                <div class="text-center text-lg font-medium">
+                    <a href="#!" class="hidden ring-2 rounded-full ring-yellow-300 p-1.5 items-center justify-center hover:bg-yellow-300 sm:flex"
+                       @click="
+                           $dispatch('menu-item-change', 'beauty');
+                           $nextTick(() => $store.menu.toggle('category'))
+                       "
+                    >
+                        Все курсы
+                        <svg class="w-6 h-6 pl-1 pt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-left block sm:hidden">
+                        Все курсы
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 p-6 space-y-6">
+                <div class="font-semibold text-lg">Саморазвитие</div>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#">Event-менеджмент</a>
+                    </li>
+                    <li>
+                        <a href="#">Excel и Google таблицы</a>
+                    </li>
+                    <li>
+                        <a href="#">HR и управление персоналом</a>
+                    </li>
+                    <li>
+                        <a href="#">Product manager</a>
+                    </li>
+                    <li>
+                        <a href="#">Project manager</a>
+                    </li>
+                </ul>
+
+                <div class="text-center text-lg font-medium">
+                    <a href="#!" class="hidden ring-2 rounded-full ring-yellow-300 p-1.5 items-center justify-center hover:bg-yellow-300 sm:flex"
+                       @click="
+                           $dispatch('menu-item-change', 'self');
+                           $nextTick(() => $store.menu.toggle('category'))
+                       "
+                    >
+                        Все курсы
+                        <svg class="w-6 h-6 pl-1 pt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-left block sm:hidden">
+                        Все курсы
                     </a>
                 </div>
             </div>
@@ -2258,6 +3918,44 @@
     </div>
 </footer>
 
+
+<!-- scripts -->
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.store('menu', {
+            desktop: {
+                category: false
+            },
+
+            mobile: {
+                category: false
+            },
+
+            show(type, device = 'desktop') {
+                this[device][type] = true
+            },
+
+            hide(type, device = 'desktop') {
+                this[device][type] = false
+            },
+
+            status(type, device = 'desktop') {
+                return this[device][type]
+            },
+
+            hideAll(device = 'desktop') {
+                for (key in this[device]) {
+                    this.hide(key)
+                }
+            },
+
+            toggle(type, device = 'desktop') {
+                this[device][type] = !this[device][type]
+            }
+        })
+    })
+</script>
+<!-- scripts -->
 
 </body>
 </html>
