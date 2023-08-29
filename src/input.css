@@ -6,7 +6,6 @@
 @import 'tailwindcss/utilities';
 
 @import "./default.css";
-
 @import "./buttons.css";
 
 /* override */
@@ -16,6 +15,10 @@ a {
 
 nav a {
     @apply text-black
+}
+
+nav.breadcrumb a {
+    @apply text-blue-800
 }
 
 [x-cloak] {
